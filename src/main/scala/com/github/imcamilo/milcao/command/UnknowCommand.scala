@@ -4,6 +4,6 @@ import com.github.imcamilo.milcao.fs.State
 
 class UnknowCommand extends Command {
 
-  override def apply(state: State): State = state.setMessage("Command not found!")
+  override def apply(state: State): State = state.setMessage("command not found")
 
 }
