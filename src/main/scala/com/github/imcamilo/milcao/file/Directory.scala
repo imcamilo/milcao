@@ -3,6 +3,8 @@ package com.github.imcamilo.milcao.file
 class Directory(override val parentPath: String, override val name: String, val contents: List[EntryDirectory])
   extends EntryDirectory(parentPath, name) {
 
+  def hasEntry(name: String): Boolean = ???
+
 }
 
 object Directory {
