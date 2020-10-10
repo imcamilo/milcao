@@ -6,14 +6,13 @@ import com.github.imcamilo.milcao.fs.State
 class Mkdir(val name: String) extends Command {
 
   override def apply(state: State): State = {
-    //receive wd
     val wd = state.workingDirectory
     if (wd.hasEntry(name)) {
-      state.setMessage("entry " + name + "already created")
+      state.setMessage("entry " + name + " already created")
     } else if (name.contains(Directory.SEPARATOR)) {
-      state.setMessage(name + "must not contains separators")
+      state.setMessage(name + " must not contains separators")
     } else if (checkIllegal(name)) {
-      state.setMessage(name + "illegal entry name")
+      state.setMessage(name + " illegal entry name")
     } else {
       doMkdir(state, name)
     }
