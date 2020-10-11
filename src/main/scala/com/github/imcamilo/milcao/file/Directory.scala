@@ -1,5 +1,7 @@
 package com.github.imcamilo.milcao.file
 
+import com.github.imcamilo.milcao.fs.MilcaoFileSystemException
+
 import scala.annotation.tailrec
 
 class Directory(override val parentPath: String, override val name: String, val contents: List[EntryDirectory])
@@ -7,7 +9,9 @@ class Directory(override val parentPath: String, override val name: String, val 
 
   def addEntry(newEntry: EntryDirectory): Directory = new Directory(parentPath, name, contents :+ newEntry)
 
-  def asDirectory: Directory = this
+  override def asDirectory: Directory = this
+
+  override def asFile: File = throw new MilcaoFileSystemException("a directory cannot be converter to a file")
 
   def findDescendant(path: List[String]): Directory =
     if (path.isEmpty) this
@@ -29,7 +33,7 @@ class Directory(override val parentPath: String, override val name: String, val 
   def getAllFoldersInPath: List[String] =
     path.substring(1).split(Directory.SEPARATOR).toList.filter(p => !p.isEmpty)
 
-  def getType: String = "Directory"
+  override def getType: String = "Directory"
 
   def replaceEntry(entryName: String, newEntry: EntryDirectory): Directory =
     new Directory(parentPath, entryName, contents.filter(p => !p.name.equals(entryName)) :+ newEntry)
