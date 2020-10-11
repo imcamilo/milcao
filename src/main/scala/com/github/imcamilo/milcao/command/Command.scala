@@ -16,13 +16,11 @@ object Command {
   val TOUCH = "touch"
   val CD = "cd"
 
-  def emptyCommand: Command = new Command {
-    override def apply(state: State): State = state
-  }
+  def emptyCommand: Command =
+    (state: State) => state
 
-  def incompleteCommand(name: String): Command = new Command {
-    override def apply(state: State): State = state.setMessage(name + ": incomplete command")
-  }
+  def incompleteCommand(name: String): Command =
+    (state: State) => state.setMessage(name + ": incomplete command")
 
   def from(input: String): Command = {
     val command: Array[String] = input.split(" ")
