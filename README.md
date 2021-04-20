@@ -3,6 +3,10 @@
 This is Milcao, just another file system
 
 ---
+## Getting Started
+
+```gradle clean```
+```gradle build```
 
 ## Usage
 
